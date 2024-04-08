@@ -18,8 +18,8 @@ jobs:
       - name: Construção da imagem docker
         uses: docker/build-push-action@v5.3.0
         with:
-          context: .kube-news/src
-          file: ./src/Dockerfile
+          context: ./kube-news/src
+          file: ./kube-news/src/Dockerfile
           push: true
           tags: 
             gusstavota6621/devops4devs-news:latest
