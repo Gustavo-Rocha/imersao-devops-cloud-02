@@ -11,11 +11,11 @@ jobs:
       - name: Construção da imagem docker
         run: echo "docker build"
       - name: "pubicar a imagem no docker hub"
-        run: echo "Docher push"
+        run: echo "Docker push"
   CD:
     runs-on: ubuntu-latest
     steps: 
       - name: Conectar no Kubernets
         run: echo "COnfiguração do kubeconfig"
       - name: Executar o deploy
-        run: "kubectl apply"
+        run: echo "kubectl apply"
