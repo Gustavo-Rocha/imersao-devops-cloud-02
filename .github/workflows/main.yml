@@ -8,10 +8,22 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps: 
+      - uses: actions/checkout@v4.1.2
+      - name: Checkout do repositorio
+      - name: autenticacao no Docker
+        with: 
+          username: ${{secrets.DOCKERHUB_USER}}
+          password: ${{secrets.DOCKERHUB_PWD}}
       - name: Construção da imagem docker
-        run: echo "docker build"
-      - name: "pubicar a imagem no docker hub"
-        run: echo "Docker push"
+      - uses: docker/build-push-action@v5.3.0
+        with:
+          context: ./src
+          file: ./src/Dockerfile
+          push: true
+          tags: 
+            gusstavota6621/devops4devs-news:latest
+            gusstavota6621/devops4devs-news:${{github.run_number}}
+
   CD:
     needs: [CI]
     runs-on: ubuntu-latest
