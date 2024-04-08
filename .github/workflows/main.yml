@@ -24,7 +24,6 @@ jobs:
           tags: 
             gusstavota6621/devops4devs-news:latest
             gusstavota6621/devops4devs-news:${{github.run_number}}
-
   CD:
     needs: [CI]
     runs-on: ubuntu-latest
