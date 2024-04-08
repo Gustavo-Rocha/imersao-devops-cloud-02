@@ -13,6 +13,7 @@ jobs:
       - name: "pubicar a imagem no docker hub"
         run: echo "Docker push"
   CD:
+    needs: [CI]
     runs-on: ubuntu-latest
     steps: 
       - name: Conectar no Kubernets
