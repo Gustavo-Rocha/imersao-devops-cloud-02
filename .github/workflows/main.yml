@@ -23,7 +23,7 @@ jobs:
           push: true
           tags: 
             gusstavota6621/devops4devs-news:latest
-            gusstavota6621/devops4devs-news:${{github.run_number}}
+            gusstavota6621/devops4devs-news:9
   CD:
     needs: [CI]
     runs-on: ubuntu-latest
