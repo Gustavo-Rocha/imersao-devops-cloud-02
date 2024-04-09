@@ -28,7 +28,22 @@ jobs:
     needs: [CI]
     runs-on: ubuntu-latest
     steps: 
+      - name: Checkout do repositorio
+        uses: actions/checkout@v4.1.2
+      - name: configurar autenticacao no gcp
+        run: echo "COnfiguração do login na gcp"
       - name: Conectar no Kubernets
         run: echo "COnfiguração do kubeconfig"
+      - name: atualizacao do manifesto
+        shell: bash
+        run: |
+          sed -i "s/{{ACCESS_KEY}}/${{ secrets.GCP_ACCESS_KEY }}"/g ./kube-news/k8s/deploy.yaml
+          sed -i "s/{{ACCESS_SECRET}}/${{ secrets.GCP_ACCESS_SECRET }}"/g ./kube-news/k8s/deploy.yaml
       - name: Executar o deploy
-        run: echo "kubectl apply"
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          manifests: |
+            ./kube-news/k8s/deploy.yaml
+          images: |
+            gusstavota6621/devops4devs-news:${{github.run_number}}
+            
