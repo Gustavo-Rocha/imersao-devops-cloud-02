@@ -21,9 +21,9 @@ jobs:
           context: ./kube-news/src
           file: ./kube-news/src/Dockerfile
           push: true
-          tags: 
-            gusstavota6621/devopsparadevsnews:latest
-            gusstavota6621/devopsparadevsnews:${{github.run_number}}
+          tags: |
+            gusstavota6621/devops4devs-news:latest
+            gusstavota6621/devops4devs-news:${{github.run_number}}
   CD:
     needs: [CI]
     runs-on: ubuntu-latest
