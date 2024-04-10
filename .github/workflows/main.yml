@@ -47,6 +47,9 @@ jobs:
   CD:
     needs: [CI]
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     steps: 
       - name: Checkout do repositorio
         uses: actions/checkout@v4.1.2
