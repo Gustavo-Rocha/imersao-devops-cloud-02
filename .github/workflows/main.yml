@@ -57,7 +57,7 @@ jobs:
       - name: configurar autenticacao no gcp
         uses: google-github-actions/auth@v2.1.2
         with:
-          workload_identity_provider: 'projects/612478183133/locations/global/workloadIdentityPools/github-actions-backend/providers/github'
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }} #'projects/612478183133/locations/global/workloadIdentityPools/github-actions-backend/providers/github'
           service_account: ${{ secrets.GOOGLE_SA_EMAIL }}
           
       - name: Docker configuration
