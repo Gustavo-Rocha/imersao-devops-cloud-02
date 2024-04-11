@@ -43,7 +43,8 @@ jobs:
     # Push the Docker image to Google Artifact Registry
       #- name: Publish
        # run: |-
-        #  docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"      
+        #  docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"    
+        # ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
   CD:
     needs: [CI]
     runs-on: ubuntu-latest
@@ -53,7 +54,6 @@ jobs:
     steps: 
       - name: Checkout do repositorio
         uses: actions/checkout@v4.1.2
-        #${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
       - name: configurar autenticacao no gcp
         uses: google-github-actions/auth@v2.1.2
         with:
