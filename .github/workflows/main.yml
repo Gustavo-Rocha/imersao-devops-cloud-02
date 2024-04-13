@@ -59,17 +59,17 @@ jobs:
         with:
           token_format: 'access_token'
           workload_identity_provider: 'projects/612478183133/locations/global/workloadIdentityPools/github-actions-backend/providers/github'
-          service_account: ${{ secrets.GOOGLE_SA_EMAIL }}
-          
-      - name: Docker configuration
-        run: |-
-          echo $GAR_LOCATION
-          echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev     
+          service_account: 'github-actions@gcp-4-dev-417723.iam.gserviceaccount.com' #${{ secrets.GOOGLE_SA_EMAIL }}
+
       - name: Set up GKE credentials    
         uses: google-github-actions/get-gke-credentials@v2.1.0
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
-          location: ${{ env.GKE_ZONE }}
+          location: ${{ env.GKE_ZONE }}    
+      - name: Docker configuration
+        run: |-
+          echo $GAR_LOCATION
+          echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev          
          # Build the Docker image
       - name: Build
         run: |-
