@@ -73,7 +73,7 @@ jobs:
               --tag "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA" \
               --build-arg GITHUB_SHA="$GITHUB_SHA" \
               --build-arg GITHUB_REF="$GITHUB_REF" \
-              .
+              ./kube-news/src/Dockerfile
           
        # Push the Docker image to Google Artifact Registry
       - name: Publish
