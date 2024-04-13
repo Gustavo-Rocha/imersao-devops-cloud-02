@@ -64,8 +64,8 @@ jobs:
       - name: Set up GKE credentials    
         uses: google-github-actions/get-gke-credentials@v2.1.0
         with:
-          cluster_name: ${{ env.GKE_CLUSTER }}
-          location: ${{ env.GKE_ZONE }}    
+          cluster_name: my-first-cluster-1 #${{ env.GKE_CLUSTER }}
+          location: northamerica-northeast1-c #${{ env.GKE_ZONE }}    
       - name: Docker configuration
         run: |-
           echo $GAR_LOCATION
