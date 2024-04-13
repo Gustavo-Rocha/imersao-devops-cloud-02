@@ -59,7 +59,7 @@ jobs:
         with:
           #token_format: 'access_token'
           workload_identity_provider: 'projects/612478183133/locations/global/workloadIdentityPools/github-actions-backend/providers/github'
-          service_account: 'github-actions@gcp-4-dev-417723.iam.gserviceaccount.com' #${{ secrets.GOOGLE_SA_EMAIL }}
+          service_account: '612478183133-compute@developer.gserviceaccount.com' #${{ secrets.GOOGLE_SA_EMAIL }}
 
       - name: Set up GKE credentials    
         uses: google-github-actions/get-gke-credentials@v2.1.0
