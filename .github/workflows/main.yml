@@ -67,18 +67,18 @@ jobs:
           cluster_name: my-first-cluster-1 #${{ env.GKE_CLUSTER }}
           location: northamerica-northeast1-c #${{ env.GKE_ZONE }}    
           
-      - name: Docker configuration
-        run: |-
-          echo $GAR_LOCATION
-          echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev          
-         # Build the Docker image
-      - name: Build
-        run: |-
-          docker build \
-            --tag "us-central1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
-            --build-arg GITHUB_SHA="$GITHUB_SHA" \
-            --build-arg GITHUB_REF="$GITHUB_REF" \
-            .
+ #     - name: Docker configuration
+ #       run: |-
+ #         echo $GAR_LOCATION
+ #         echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev          
+ #        # Build the Docker image
+ #     - name: Build
+ #       run: |-
+ #         docker build \
+ #           --tag "us-central1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
+ #           --build-arg GITHUB_SHA="$GITHUB_SHA" \
+ #           --build-arg GITHUB_REF="$GITHUB_REF" \
+ #           .
     # Push the Docker image to Google Artifact Registry
       - name: Publish
         run: |-
