@@ -32,6 +32,7 @@ jobs:
           tags: |
             gusstavota6621/devops4devs-news:latest
             gusstavota6621/devops4devs-news:${{github.run_number}}
+            us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE:$GITHUB_SHA
           run: |-
             docker build \
               --tag "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE:$GITHUB_SHA" \
