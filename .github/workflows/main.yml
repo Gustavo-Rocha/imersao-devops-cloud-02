@@ -32,10 +32,10 @@ jobs:
           tags: |
             gusstavota6621/devops4devs-news:latest
             gusstavota6621/devops4devs-news:${{github.run_number}}
-            us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE:$GITHUB_SHA
+            us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:${{github.run_number}}
           run: |-
             docker build \
-              --tag "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE:$GITHUB_SHA" \
+              --tag "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:${{github.run_number}}:$GITHUB_SHA" \
               --build-arg GITHUB_SHA="$GITHUB_SHA" \
               --build-arg GITHUB_REF="$GITHUB_REF" \
               .
@@ -78,7 +78,7 @@ jobs:
        # Push the Docker image to Google Artifact Registry
       - name: Publish
         run: |-
-          docker push "us-central1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"    
+          docker push "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:${{github.run_number}}" #"us-central1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"    
       - name: Docker configuration
         run: |-
           echo $GAR_LOCATION
