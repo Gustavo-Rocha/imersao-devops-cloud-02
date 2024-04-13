@@ -70,7 +70,7 @@ jobs:
       - name: Build
         run: |-
             docker build \
-              --tag "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:${{github.run_number}}:$GITHUB_SHA" \
+              --tag "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA" \
               --build-arg GITHUB_SHA="$GITHUB_SHA" \
               --build-arg GITHUB_REF="$GITHUB_REF" \
               .
