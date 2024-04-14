@@ -112,11 +112,14 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_ZONE
           sed -i "s/GOOGLE_PROJECT/$PROJECT_ID/g" ./kube-news/k8s/deploy.yaml
-          kubectl apply -f ./kube-news/k8s/deploy.yaml
-
-
-      - name: Conectar no Kubernets
-        run: echo "COnfiguração do kubeconfig"
+          #kubectl apply -f ./kube-news/k8s/deploy.yaml
+      - name: Executar o deploy
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          manifests: |
+            ./kube-news/k8s/deploy.yaml
+          images: |
+            $IMAGE
         
       - name: atualizacao do manifesto
         shell: bash
