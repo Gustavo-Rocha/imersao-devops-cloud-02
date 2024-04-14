@@ -82,7 +82,8 @@ jobs:
         run: |-
             gcloud auth configure-docker us-central1-docker.pkg.dev
             docker build -t us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/$IMAGE ./kube-news/src
-           
+            docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE 
+            
        # Push the Docker image to Google Artifact Registry
       - name: Publish
         run: |-
@@ -97,6 +98,8 @@ jobs:
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
             ./kube-news/src
+          docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE 
+            
 
       - name: Conectar no Kubernets
         run: echo "COnfiguração do kubeconfig"
