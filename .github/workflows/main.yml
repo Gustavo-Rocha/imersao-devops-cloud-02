@@ -56,18 +56,18 @@ jobs:
       - name: Checkout do repositorio
         uses: actions/checkout@v4.1.2
         
-     # - name: install the gcloud cli
-     #   uses: google-github-actions/setup-gcloud@v2
-     #   with:
+      - name: install the gcloud cli
+        uses: google-github-actions/setup-gcloud@v2
+        with:
      #     project_id: ${{ secrets.GOOGLE_PROJECT }}
-     #     service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+         install_components: 'gke-gcloud-auth-plugin'
      #     export_default_credentials: true
 
       - name: configurar autenticacao no gcp
         uses: google-github-actions/auth@v2.1.2
         with:
           token_format: 'access_token'
-          install_components: 'gke-gcloud-auth-plugin'
+          #install_components: 'gke-gcloud-auth-plugin'
           workload_identity_provider: 'projects/612478183133/locations/global/workloadIdentityPools/github-actions-backend/providers/github'
           service_account: 'github-actions@gcp-4-dev-417723.iam.gserviceaccount.com' #${{ secrets.GOOGLE_SA_EMAIL }}
           
@@ -112,7 +112,7 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --region $GKE_ZONE
           sed -i "s/GOOGLE_PROJECT/$PROJECT_ID/g" deploy.yaml
-          kubectl apply -f deploy.yaml ./k8s
+          kubectl apply -f deploy.yaml 
 
 
       - name: Conectar no Kubernets
