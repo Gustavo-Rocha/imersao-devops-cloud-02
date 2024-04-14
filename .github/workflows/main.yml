@@ -75,40 +75,27 @@ jobs:
         with:
           cluster_name: my-first-cluster-1 #${{ env.GKE_CLUSTER }}
           location: northamerica-northeast1-c #${{ env.GKE_ZONE }}
-          
-      - run: |-
-          gcloud --quiet auth configure-docker    
 
       - name: Build docker and push
         env:
           GOOGLE_PROJECT: ${{ secrets.GKE_PROJECT }}
         run: |-
             gcloud auth configure-docker us-central1-docker.pkg.dev
-            docker build -t us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA ./kube-news/src
-            docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA
-            
-             # --tag "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA" \
-             # --build-arg GITHUB_SHA="$GITHUB_SHA" \
-             # --build-arg GITHUB_REF="$GITHUB_REF" \
-             # ../kube-news/src/
-      - name: Docker configuration
-        run: |-
-          echo $GAR_LOCATION
-          echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev    
+            docker build -t us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/$IMAGE:$GITHUB_SHA ./kube-news/src
+           
        # Push the Docker image to Google Artifact Registry
       - name: Publish
         run: |-
-          docker push "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:${{github.run_number}}" #"us-central1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" 
+          docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE:$GITHUB_SHA 
          
          # Build the Docker image
       - name: Buildteste2
         run: |-
-          docker build \
-            --tag "us-central1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
+          docker build -t \
+            --tag us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
-            .
-   
+            ./kube-news/src
 
       - name: Conectar no Kubernets
         run: echo "COnfiguração do kubeconfig"
