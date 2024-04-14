@@ -94,12 +94,11 @@ jobs:
       - name: Buildteste2
         run: |-
           docker build -t \
-            --tag us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE" \
+            --tag us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
             ./kube-news/src
-          docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE 
-            
+          docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE             
 
       - name: Conectar no Kubernets
         run: echo "COnfiguração do kubeconfig"
