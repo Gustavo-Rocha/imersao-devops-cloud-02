@@ -68,13 +68,17 @@ jobs:
           cluster_name: my-first-cluster-1 #${{ env.GKE_CLUSTER }}
           location: northamerica-northeast1-c #${{ env.GKE_ZONE }}
           
-      - run: |-
-          gcloud --quiet auth configure-docker    
+     # - run: |-
+       #   gcloud --quiet auth configure-docker    
           
       - name: Build docker and push
+        env:
+          GOOGLE_PROJECT: ${{ secrets.GKE_PROJECT }}
         run: |-
+            google auth configure-docker us-central1-docker.pkg.dev
             docker build -t us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA ./kube-news/src
-            docker push  gcr.io/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA
+            docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA
+            
              # --tag "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA" \
              # --build-arg GITHUB_SHA="$GITHUB_SHA" \
              # --build-arg GITHUB_REF="$GITHUB_REF" \
