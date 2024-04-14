@@ -56,25 +56,13 @@ jobs:
       - name: Checkout do repositorio
         uses: actions/checkout@v4.1.2
         
-      - name: install the gcloud cli
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ secrets.GOOGLE_PROJECT }}
-          service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-          export_default_credentials: true
+     # - name: install the gcloud cli
+     #   uses: google-github-actions/setup-gcloud@v2
+     #   with:
+     #     project_id: ${{ secrets.GOOGLE_PROJECT }}
+     #     service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+     #     export_default_credentials: true
 
-      - name: Build docker and push
-        env:
-          GOOGLE_PROJECT: ${{ secrets.GKE_PROJECT }}
-        run: |-
-            google auth configure-docker us-central1-docker.pkg.dev
-            docker build -t us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA ./kube-news/src
-            docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:$GITHUB_SHA
-
-
-
-
-        
       - name: configurar autenticacao no gcp
         uses: google-github-actions/auth@v2.1.2
         with:
@@ -88,9 +76,9 @@ jobs:
           cluster_name: my-first-cluster-1 #${{ env.GKE_CLUSTER }}
           location: northamerica-northeast1-c #${{ env.GKE_ZONE }}
           
-     # - run: |-
-       #   gcloud --quiet auth configure-docker    
-          
+      - run: |-
+          gcloud --quiet auth configure-docker    
+
       - name: Build docker and push
         env:
           GOOGLE_PROJECT: ${{ secrets.GKE_PROJECT }}
