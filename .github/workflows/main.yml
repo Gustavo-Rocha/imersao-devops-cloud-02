@@ -68,10 +68,7 @@ jobs:
           cluster_name: my-first-cluster-1 #${{ env.GKE_CLUSTER }}
           location: northamerica-northeast1-c #${{ env.GKE_ZONE }}    
 
-      - name: Docker configuration
-        run: |-
-          echo $GAR_LOCATION
-          echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev   
+        
           
       - name: Build docker and push
         run: |-
@@ -86,7 +83,10 @@ jobs:
       - name: Publish
         run: |-
           docker push "us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/devops4devs-news:${{github.run_number}}" #"us-central1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" 
-          
+      - name: Docker configuration
+        run: |-
+          echo $GAR_LOCATION
+          echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev    
          # Build the Docker image
       - name: Buildteste2
         run: |-
