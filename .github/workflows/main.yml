@@ -81,18 +81,18 @@ jobs:
           GOOGLE_PROJECT: ${{ secrets.GKE_PROJECT }}
         run: |-
             gcloud auth configure-docker us-central1-docker.pkg.dev
-            docker build -t us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/$IMAGE:$GITHUB_SHA ./kube-news/src
+            docker build -t us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/$IMAGE ./kube-news/src
            
        # Push the Docker image to Google Artifact Registry
       - name: Publish
         run: |-
-          docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE:$GITHUB_SHA 
+          docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE 
          
          # Build the Docker image
       - name: Buildteste2
         run: |-
           docker build -t \
-            --tag us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/$IMAGE:$GITHUB_SHA" \
+            --tag us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/gusstavota6621/$IMAGE" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
             ./kube-news/src
