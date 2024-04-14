@@ -102,6 +102,7 @@ jobs:
        # Push the Docker image to Google Artifact Registry
       - name: Publish
         run: |-
+          gcloud auth configure-docker us-central1-docker.pkg.dev
           docker push  us-central1-docker.pkg.dev/gcp-4-dev-417723/imagens/$IMAGE               
 
       - name: Conectar no Kubernets
